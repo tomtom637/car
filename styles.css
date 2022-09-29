@@ -1,0 +1,20 @@
+html, body {
+  background-color: #222;
+  box-sizing: border-box;
+  font-family: "Courier New", Courier, monospace;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+.wrapper {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+}
+.canvas {
+  display: block;
+  margin: 20px auto;
+  background-color: #111;
+}
