@@ -5,8 +5,8 @@ export const ctx = canvas.getContext("2d");
 
 const app = document.getElementById("app");
 canvas.classList.add("canvas");
-canvas.width = 1600;
-canvas.height = 1600;
+canvas.width = window.innerWidth * 2;
+canvas.height = window.innerHeight * 2;
 canvas.style.width = canvas.width / 2 + "px";
 canvas.style.height = canvas.height / 2 + "px";
 app.append(canvas);
@@ -29,3 +29,11 @@ function gameLoop(timestamp) {
 }
 
 gameLoop();
+
+// RESIZE EVENT
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth * 2;
+  canvas.height = window.innerHeight * 2;
+  canvas.style.width = canvas.width / 2 + "px";
+  canvas.style.height = canvas.height / 2 + "px";
+});
