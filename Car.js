@@ -1,0 +1,54 @@
+import { canvas, ctx } from "./app.js";
+import Controls from "./Controls.js";
+
+const image = new Image();
+image.src = "./car.png";
+
+export default class Car {
+  constructor (x, y, width, height) {
+    this.x = x;
+    this.y = y;
+    this.speed = 0;
+    this.maxSpeed = 4;
+    this.acceleration = 0.15;
+    this.friction = 1.02;
+    this.angle = 0;
+    this.width = width;
+    this.height = height;
+    this.controls = new Controls();
+    image.width = this.width * 2;
+    image.height = this.height * 2;
+  }
+  draw() {
+    ctx.save();
+    ctx.translate(this.x, this.y + this.height / 2);
+    ctx.rotate(this.angle);
+    ctx.translate(0, -this.height / 2);
+    ctx.drawImage(image, - this.width / 2, - this.height / 2, this.width, this.height);
+    ctx.restore();
+  }
+  update() {
+    if (this.controls.forward) {
+      this.speed <= this.maxSpeed ? this.speed += this.acceleration : "";
+    }
+    if (this.controls.backward) {
+      this.speed >= - this.maxSpeed ? this.speed -= this.acceleration : "";
+    }
+    if (this.speed !== 0) {
+      const flip = this.speed < 0 ? -1 : 1;
+      if (this.controls.left) {
+        this.angle -= 0.02 * flip;
+      }
+      if (this.controls.right) {
+        this.angle += 0.02 * flip;
+      }
+    }
+    
+    this.x += Math.sin(this.angle) * this.speed;
+    this.y -= Math.cos(this.angle) * this.speed;
+    this.speed /= this.friction;
+    if (Math.abs(this.speed) < 0.1) {
+      this.speed = 0;
+    }
+  }
+}
