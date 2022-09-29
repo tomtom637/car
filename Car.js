@@ -9,8 +9,8 @@ export default class Car {
     this.x = x;
     this.y = y;
     this.speed = 0;
-    this.maxSpeed = 4;
-    this.acceleration = 0.15;
+    this.maxSpeed = 15;
+    this.acceleration = 0.5;
     this.friction = 1.02;
     this.angle = 0;
     this.width = width;
@@ -21,9 +21,9 @@ export default class Car {
   }
   draw() {
     ctx.save();
-    ctx.translate(this.x, this.y + this.height / 2);
+    ctx.translate(this.x, this.y + this.height / 1.8);
     ctx.rotate(this.angle);
-    ctx.translate(0, -this.height / 2);
+    ctx.translate(0, -this.height / 1.8);
     ctx.drawImage(image, - this.width / 2, - this.height / 2, this.width, this.height);
     ctx.restore();
   }
@@ -32,22 +32,22 @@ export default class Car {
       this.speed <= this.maxSpeed ? this.speed += this.acceleration : "";
     }
     if (this.controls.backward) {
-      this.speed >= - this.maxSpeed ? this.speed -= this.acceleration : "";
+      this.speed >= - this.maxSpeed ? this.speed -= this.acceleration / 1.5 : "";
     }
     if (this.speed !== 0) {
       const flip = this.speed < 0 ? -1 : 1;
       if (this.controls.left) {
-        this.angle -= 0.02 * flip;
+        this.angle -= 0.012 * this.speed / 4.7 * flip;
       }
       if (this.controls.right) {
-        this.angle += 0.02 * flip;
+        this.angle += 0.012 * this.speed / 4.7 * flip;
       }
     }
     
     this.x += Math.sin(this.angle) * this.speed;
     this.y -= Math.cos(this.angle) * this.speed;
     this.speed /= this.friction;
-    if (Math.abs(this.speed) < 0.1) {
+    if (Math.abs(this.speed) < 0.2) {
       this.speed = 0;
     }
   }

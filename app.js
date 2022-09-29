@@ -12,7 +12,7 @@ canvas.style.height = canvas.height / 2 + "px";
 app.append(canvas);
 
 // CREATE A CAR
-const car = new Car(canvas.width / 2, canvas.height - 200, 100, 200, "red");
+const car = new Car(canvas.width / 2, canvas.height - 200, 80, 160);
 
 // GAME LOOP
 let previousTimestamp = 0;
