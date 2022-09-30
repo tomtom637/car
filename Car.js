@@ -34,16 +34,13 @@ export default class Car {
     if (this.controls.backward) {
       this.speed >= - this.maxSpeed ? this.speed -= this.acceleration / 1.5 : "";
     }
-    if (this.speed !== 0) {
-      const flip = this.speed < 0 ? -1 : 1;
-      if (this.controls.left) {
-        this.angle -= 0.012 * this.speed / 4.7 * flip;
-      }
-      if (this.controls.right) {
-        this.angle += 0.012 * this.speed / 4.7 * flip;
-      }
+    if (this.controls.left) {
+      this.angle -= 0.012 * this.speed / 4.7;
     }
-    
+    if (this.controls.right) {
+      this.angle += 0.012 * this.speed / 4.7;
+    }
+
     this.x += Math.sin(this.angle) * this.speed;
     this.y -= Math.cos(this.angle) * this.speed;
     this.speed /= this.friction;
