@@ -1,4 +1,8 @@
 export default class Controls {
+  forward: boolean;
+  backward: boolean;
+  left: boolean;
+  right: boolean;
   constructor () {
     this.forward = false;
     this.backward = false;

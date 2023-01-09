@@ -1,11 +1,22 @@
-import { canvas, ctx } from "./app.js";
-import Controls from "./Controls.js";
+import { ctx } from "./main";
+import Controls from "./Controls";
+import carImage from "./asset/car.png";
 
 const image = new Image();
-image.src = "./car.png";
+image.src = carImage;
 
 export default class Car {
-  constructor (x, y, width, height) {
+  x: number;
+  y: number;
+  speed: number;
+  maxSpeed: number;
+  acceleration: number;
+  friction: number;
+  angle: number;
+  width: number;
+  height: number;
+  controls: Controls;
+  constructor (x: number, y: number, width: number, height: number) {
     this.x = x;
     this.y = y;
     this.speed = 0;
@@ -20,6 +31,7 @@ export default class Car {
     image.height = this.height * 2;
   }
   draw() {
+    if (ctx == null) throw new Error("ctx is null");
     ctx.save();
     ctx.translate(this.x, this.y + this.height / 1.8);
     ctx.rotate(this.angle);
